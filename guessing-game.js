@@ -1,4 +1,5 @@
 const easyLevelHandler = require('./api/level/easy-level-handler');
+const mediumLevelHandler = require('./api/level/medium-level-handler');
 
 const readline = require('readline').createInterface({
     input: process.stdin,
@@ -31,6 +32,7 @@ readline.question('Enter your choice: ', choice => {
         case '2':
             console.log(`Great! You have selected the Medium difficulty level.`);
             console.log(`Let's start the game!`);
+            mediumLevelHandler(readline)
             break;
         case '3':
             console.log(`Great! You have selected the Hard difficulty level.`);
