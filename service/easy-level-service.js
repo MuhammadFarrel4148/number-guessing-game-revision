@@ -1,11 +1,10 @@
-const easyLevelService = async(readline, randomNumber) => {
+const easyLevelService = async(readline, randomNumber, askToPlay) => {
     let attempts = 0;
 
     const gameLoop = () => {
         if(attempts === 10) {
             console.log(`Game over! The correct number was ${randomNumber}.`);
-            readline.close();
-            return;
+            askToPlay();
         };
 
         readline.question('Enter your guess: ', numberGuessed => {
@@ -17,8 +16,7 @@ const easyLevelService = async(readline, randomNumber) => {
                 gameLoop();
             } else {
                 console.log(`Congratulations! You guessed the correct number in ${attempts} attempts.`);
-                readline.close();
-                return;
+                askToPlay();
             };
         });
     };

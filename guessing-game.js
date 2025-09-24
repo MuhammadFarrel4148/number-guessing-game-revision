@@ -19,29 +19,47 @@ const difficultLevel = () => {
     console.log(``);
 };
 
+const askToPlayAgain = () => {
+    readline.question('Do you want to play again (Y/N)? ', (answer) => {
+        if(answer.toLowerCase() === 'y') {
+            difficultLevel();
+            choiceLevel(); 
+        } else {
+            console.log('Thanks for playing!');
+            readline.close();
+        }
+    });
+};
+
+const choiceLevel = () => {
+    readline.question('Enter your choice: ', choice => {
+        console.log('');
+
+        switch(choice) {
+            case '1':
+                console.log(`Great! You have selected the Easy difficulty level.`);
+                console.log(`Let's start the game!\n`);
+                easyLevelHandler(readline, askToPlayAgain)
+                break;
+            case '2':
+                console.log(`Great! You have selected the Medium difficulty level.`);
+                console.log(`Let's start the game!`);
+                mediumLevelHandler(readline, askToPlayAgain);
+                break;
+            case '3':
+                console.log(`Great! You have selected the Hard difficulty level.`);
+                console.log(`Let's start the game!`);
+                hardLevelHandler(readline, askToPlayAgain);
+                break;
+            default:
+                console.log(`Masukkan perintah yang valid (1, 2, 3)`);
+                break;
+        };
+    });
+};
+
 welcomeMessage();
 difficultLevel();
-readline.question('Enter your choice: ', choice => {
-    console.log('');
+choiceLevel();
 
-    switch(choice) {
-        case '1':
-            console.log(`Great! You have selected the Easy difficulty level.`);
-            console.log(`Let's start the game!\n`);
-            easyLevelHandler(readline);
-            break;
-        case '2':
-            console.log(`Great! You have selected the Medium difficulty level.`);
-            console.log(`Let's start the game!`);
-            mediumLevelHandler(readline);
-            break;
-        case '3':
-            console.log(`Great! You have selected the Hard difficulty level.`);
-            console.log(`Let's start the game!`);
-            hardLevelHandler(readline);
-            break;
-        default:
-            console.log(`Masukkan perintah yang valid (1, 2, 3)`);
-            break;
-    };
-});
+module.exports = choiceLevel;
