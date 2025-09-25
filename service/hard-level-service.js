@@ -1,3 +1,5 @@
+const hintGame = require("./hint-service");
+
 const hardLevelService = async(readline, randomNumber, askToPlay) => {
     let attempts = 0;
 
@@ -13,7 +15,7 @@ const hardLevelService = async(readline, randomNumber, askToPlay) => {
             if(parseNumberGuessed !== randomNumber) {
                 numberGuessed > randomNumber ? console.log(`Incorrect! The number is less than ${numberGuessed}.\n`) : console.log(`Incorrect! The number is greater than ${numberGuessed}.\n`);
                 attempts++;
-                gameLoop();
+                hintGame(readline, randomNumber, gameLoop);
             } else {
                 console.log(`Congratulations! You guessed the correct number in ${attempts} attempts.`);
                 askToPlay();
