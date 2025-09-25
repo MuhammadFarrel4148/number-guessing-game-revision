@@ -2,7 +2,7 @@ const hardLevelService = require('../../service/hard-level-service');
 
 const hardLevelHandler = (readline, askToPlay) => {
     const randomNumber = Math.floor(Math.random() * 100) + 1;
-
+    console.log(randomNumber);
     hardLevelService(readline, randomNumber, askToPlay);
 };
 

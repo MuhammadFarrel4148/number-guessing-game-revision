@@ -18,6 +18,11 @@ const mediumLevelService = (readline, randomNumber, askToPlay) => {
                 hintGame(readline, randomNumber, gameLoop);
             } else {
                 console.log(`Congratulations! You guessed the correct number in ${attempts} attempts.`);
+                if(attempts < highScore[2]) {
+                    highScore[1] = attempts;
+                    savedHighScore(highScore);
+                    console.log(`You break the record with ${attempts}`);
+                };
                 askToPlay();
             };
         });

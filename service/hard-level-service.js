@@ -1,7 +1,13 @@
 const hintGame = require("./hint-service");
+const {
+    loadHighScore,
+    savedHighScore
+} = require('./file-service');
 
 const hardLevelService = async(readline, randomNumber, askToPlay) => {
-    let attempts = 0;
+    let attempts = 1;
+    let highScore = loadHighScore();
+    console.log(highScore);
 
     const gameLoop = () => {
         if(attempts === 3) {
@@ -18,6 +24,11 @@ const hardLevelService = async(readline, randomNumber, askToPlay) => {
                 hintGame(readline, randomNumber, gameLoop);
             } else {
                 console.log(`Congratulations! You guessed the correct number in ${attempts} attempts.`);
+                if(attempts < highScore[2]) {
+                    highScore[2] = attempts;
+                    savedHighScore(highScore);
+                    console.log(`You break the record with ${attempts}`);
+                };
                 askToPlay();
             };
         });
