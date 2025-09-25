@@ -2,6 +2,10 @@ const easyLevelHandler = require('./api/level/easy-level-handler');
 const hardLevelHandler = require('./api/level/hard-level-handler');
 const mediumLevelHandler = require('./api/level/medium-level-handler');
 
+let startGame;
+let endGame;
+let resultTimer;
+
 const readline = require('readline').createInterface({
     input: process.stdin,
     output: process.stdout
@@ -19,7 +23,7 @@ const difficultLevel = () => {
     console.log(``);
 };
 
-const askToPlayAgain = () => {
+const askToPlayAgain = (startGame) => {
     readline.question('Do you want to play again (Y/N)? ', (answer) => {
         if(answer.toLowerCase() === 'y') {
             difficultLevel();
@@ -27,7 +31,10 @@ const askToPlayAgain = () => {
         } else {
             console.log('Thanks for playing!');
             readline.close();
-        }
+            endGame = new Date();
+            resultTimer = Math.floor((endGame - startGame) / 1000);
+            console.log(`You played ${resultTimer} detik in this game`);
+        };
     });
 };
 
@@ -39,17 +46,19 @@ const choiceLevel = () => {
             case '1':
                 console.log(`Great! You have selected the Easy difficulty level.`);
                 console.log(`Let's start the game!\n`);
-                easyLevelHandler(readline, askToPlayAgain)
+                startGame = new Date();
+                easyLevelHandler(readline, askToPlayAgain, startGame);
                 break;
             case '2':
                 console.log(`Great! You have selected the Medium difficulty level.`);
                 console.log(`Let's start the game!`);
-                mediumLevelHandler(readline, askToPlayAgain);
+                mediumLevelHandler(readline, askToPlayAgain, startGame);
                 break;
             case '3':
                 console.log(`Great! You have selected the Hard difficulty level.`);
                 console.log(`Let's start the game!`);
-                hardLevelHandler(readline, askToPlayAgain);
+                startGame = new Date();
+                hardLevelHandler(readline, askToPlayAgain, startGame);
                 break;
             default:
                 console.log(`Masukkan perintah yang valid (1, 2, 3)`);
