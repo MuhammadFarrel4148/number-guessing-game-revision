@@ -1,10 +1,10 @@
-const mediumLevelService = async(readline, randomNumber, askToPlay, startGame) => {
+const mediumLevelService = async(readline, randomNumber, askToPlay) => {
     let attempts = 0;
 
     const gameLoop = () => {
         if(attempts === 5) {
             console.log(`Game over! The correct number was ${randomNumber}.`);
-            askToPlay(startGame);
+            askToPlay();
         };
 
         readline.question('Enter your guess: ', numberGuessed => {
@@ -16,7 +16,7 @@ const mediumLevelService = async(readline, randomNumber, askToPlay, startGame) =
                 gameLoop();
             } else {
                 console.log(`Congratulations! You guessed the correct number in ${attempts} attempts.`);
-                askToPlay(startGame);
+                askToPlay();
             };
         });
     };

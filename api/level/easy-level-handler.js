@@ -1,9 +1,9 @@
 const easyLevelService = require('../../service/easy-level-service');
 
-const easyLevelHandler = (readline, askToPlay, startGame) => {
+const easyLevelHandler = (readline, askToPlay) => {
     const randomNumber = Math.floor(Math.random() * 100) + 1;
-    console.log(randomNumber);
-    easyLevelService(readline, randomNumber, askToPlay, startGame);
+
+    easyLevelService(readline, randomNumber, askToPlay);
 };
 
 module.exports = easyLevelHandler;
